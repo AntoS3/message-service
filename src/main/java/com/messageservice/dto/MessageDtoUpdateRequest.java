@@ -10,6 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MessageDtoUpdateRequest {
     private SequenceNumber sequenceNumber;
-    private Integer recipientId;
     private String messageText;
 }

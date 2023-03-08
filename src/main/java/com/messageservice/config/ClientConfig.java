@@ -1,5 +1,6 @@
 package com.messageservice.config;
 
+import com.messageservice.config.errorDecoder.MessageServiceErrorDecoder;
 import feign.codec.Decoder;
 import feign.jackson.JacksonDecoder;
 import org.springframework.context.annotation.Bean;
@@ -14,5 +15,10 @@ public class ClientConfig {
     @Primary
     public Decoder feignDecoder() {
         return new CustomDecoder(new JacksonDecoder());
+    }
+
+    @Bean
+    public MessageServiceErrorDecoder CustomErrorDecoder() {
+        return new MessageServiceErrorDecoder();
     }
 }

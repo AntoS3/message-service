@@ -1,8 +1,11 @@
 package com.messageservice.exception.message;
 
-public class RecipientNotFoundException extends Exception {
+import feign.FeignException;
+import org.springframework.http.HttpStatus;
+
+public class RecipientNotFoundException extends FeignException {
 
     public RecipientNotFoundException() {
-        super("Recipient not found");
+        super(HttpStatus.NOT_FOUND.value(), "Recipient not found");
     }
 }

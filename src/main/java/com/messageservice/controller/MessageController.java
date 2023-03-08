@@ -28,11 +28,18 @@ public class MessageController {
         return service.findAllMessage();
     }
 
-    @GetMapping("/{recipientId}")
+    @GetMapping("{recipientId}")
     public List<MessageDtoResponse> getAllMessageByRecipient(@PathVariable ("recipientId") Integer recipientId)
             throws MessageNotFoundException, RecipientNotFoundException {
         return service.findMessagesByRecipient(recipientId);
     }
+
+    @GetMapping("sequence")
+    public MessageDtoResponse getMessageBySequenceNumber(@RequestBody SequenceNumber sequenceNumber)
+            throws MessageNotFoundException {
+        return service.findMessageBySequenceNumber(sequenceNumber);
+    }
+
 
     @PostMapping
     public MessageDtoResponse createMessage(@RequestBody MessageDtoRequest request) {
@@ -41,7 +48,7 @@ public class MessageController {
 
     @PutMapping
     public MessageDtoResponse updateMessageById (@RequestBody MessageDtoUpdateRequest request)
-            throws MessageNotFoundException {
+            throws MessageNotFoundException, RecipientNotFoundException {
         return service.updateMessageById(request);
     }
 

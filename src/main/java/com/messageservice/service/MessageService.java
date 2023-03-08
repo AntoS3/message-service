@@ -15,8 +15,8 @@ public interface MessageService {
     List<MessageDtoResponse> findMessagesByRecipient(Integer recipientId)
             throws MessageNotFoundException,
             RecipientNotFoundException;
-    MessageDtoResponse findMessageBySequenceNumber(SequenceNumber sequenceNumber);
+    MessageDtoResponse findMessageBySequenceNumber(SequenceNumber sequenceNumber) throws MessageNotFoundException;
     MessageDtoResponse createMessage(MessageDtoRequest request);
-    MessageDtoResponse updateMessageById(MessageDtoUpdateRequest request) throws MessageNotFoundException;
+    MessageDtoResponse updateMessageById(MessageDtoUpdateRequest request) throws MessageNotFoundException, RecipientNotFoundException;
     void deleteMessageBySequenceNumber(SequenceNumber sequenceNumber) throws MessageNotFoundException;
 }
