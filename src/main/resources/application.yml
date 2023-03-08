@@ -1,0 +1,24 @@
+# MongoDB Configuration
+server:
+  port: 8090
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/MessageDB
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: admin
+    password: admin
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+
+feign:
+  name: AppPhonebook
+  url: http://localhost:8083/person
