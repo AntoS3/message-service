@@ -12,11 +12,13 @@ import java.util.List;
 public interface MessageService {
 
     List<MessageDtoResponse> findAllMessage() throws MessageNotFoundException;
-    List<MessageDtoResponse> findMessagesByRecipient(Integer recipientId)
+    List<MessageDtoResponse> findMessagesByRecipient(Integer recipientId, String jwt)
             throws MessageNotFoundException,
             RecipientNotFoundException;
     MessageDtoResponse findMessageBySequenceNumber(SequenceNumber sequenceNumber) throws MessageNotFoundException;
-    MessageDtoResponse createMessage(MessageDtoRequest request);
-    MessageDtoResponse updateMessageById(MessageDtoUpdateRequest request) throws MessageNotFoundException, RecipientNotFoundException;
+    MessageDtoResponse createMessage(MessageDtoRequest request, String jwt);
+    MessageDtoResponse updateMessageById(MessageDtoUpdateRequest request)
+            throws MessageNotFoundException,
+            RecipientNotFoundException;
     void deleteMessageBySequenceNumber(SequenceNumber sequenceNumber) throws MessageNotFoundException;
 }

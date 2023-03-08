@@ -29,9 +29,10 @@ public class MessageController {
     }
 
     @GetMapping("{recipientId}")
-    public List<MessageDtoResponse> getAllMessageByRecipient(@PathVariable ("recipientId") Integer recipientId)
+    public List<MessageDtoResponse> getAllMessageByRecipient(@PathVariable ("recipientId") Integer recipientId,
+                                                             @RequestHeader("Authorization") String jwt)
             throws MessageNotFoundException, RecipientNotFoundException {
-        return service.findMessagesByRecipient(recipientId);
+        return service.findMessagesByRecipient(recipientId, jwt);
     }
 
     @GetMapping("sequence")
@@ -42,8 +43,9 @@ public class MessageController {
 
 
     @PostMapping
-    public MessageDtoResponse createMessage(@RequestBody MessageDtoRequest request) {
-        return service.createMessage(request);
+    public MessageDtoResponse createMessage(@RequestBody MessageDtoRequest request,
+                                            @RequestHeader("Authorization") String jwt) {
+        return service.createMessage(request, jwt);
     }
 
     @PutMapping

@@ -47,11 +47,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<MessageDtoResponse> findMessagesByRecipient(Integer recipientId)
+    public List<MessageDtoResponse> findMessagesByRecipient(Integer recipientId, String jwt)
             throws MessageNotFoundException, RecipientNotFoundException {
 
         try {
-            client.getPersonById(recipientId);
+            client.getPersonById(recipientId, jwt);
 
             List<Message> messageList = repository.findByRecipientId(recipientId);
             if (!messageList.isEmpty()) {
@@ -73,10 +73,10 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public MessageDtoResponse createMessage(MessageDtoRequest messageDto) {
+    public MessageDtoResponse createMessage(MessageDtoRequest messageDto, String jwt) {
 
         try {
-            client.getPersonById(messageDto.getRecipientId());
+            client.getPersonById(messageDto.getRecipientId(), jwt);
 
             var message = mapper.map(messageDto, Message.class);
             message.setSequenceNumber(sequenceNumberService.createSequenceNumber());

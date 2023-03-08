@@ -1,4 +1,4 @@
-package com.messageservice.config.errorDecoder;
+package com.messageservice.config.error;
 
 import com.messageservice.exception.message.RecipientNotFoundException;
 import feign.Response;
@@ -11,7 +11,6 @@ public class MessageServiceErrorDecoder implements ErrorDecoder {
     public Exception decode(String methodKey, Response response) {
         if (response.status() == HttpStatus.NOT_FOUND.value()) {
             return new RecipientNotFoundException();
-        }
-        else return null;
+        } else return null;
     }
 }
