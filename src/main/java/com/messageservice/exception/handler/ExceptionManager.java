@@ -1,7 +1,6 @@
 package com.messageservice.exception.handler;
 
 import com.messageservice.exception.ErrorResponse;
-import com.messageservice.exception.message.BadInputException;
 import com.messageservice.exception.message.MessageNotFoundException;
 import com.messageservice.exception.message.RecipientNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -14,17 +13,6 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class ExceptionManager{
-
-    @ExceptionHandler({BadInputException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleBadRequest(Throwable e) {
-        var response = new ErrorResponse();
-        response.setError("Bad Input");
-        response.setStatus(HttpStatus.BAD_REQUEST.value());
-        response.setMessage(e.getMessage());
-        response.setTime(LocalDateTime.now());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    }
 
     @ExceptionHandler({
             MessageNotFoundException.class,

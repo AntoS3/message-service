@@ -18,7 +18,7 @@ public class ClientConfig {
     }
 
     @Bean
-    public MessageServiceErrorDecoder CustomErrorDecoder() {
+    public MessageServiceErrorDecoder customErrorDecoder() {
         return new MessageServiceErrorDecoder();
     }
 }

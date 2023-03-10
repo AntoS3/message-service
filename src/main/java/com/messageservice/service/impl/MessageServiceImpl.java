@@ -80,9 +80,7 @@ public class MessageServiceImpl implements MessageService {
 
             var message = mapper.map(messageDto, Message.class);
             message.setSequenceNumber(sequenceNumberService.createSequenceNumber());
-            repository.save(message);
-            return mapper.map(message, MessageDtoResponse.class);
-
+            return mapper.map(repository.save(message), MessageDtoResponse.class);
         } catch (FeignException e) {
             throw new RecipientNotFoundException();
         }
