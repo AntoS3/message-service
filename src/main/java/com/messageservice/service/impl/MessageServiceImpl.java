@@ -1,6 +1,7 @@
 package com.messageservice.service.impl;
 
 import com.messageservice.client.PersonClient;
+import com.messageservice.config.RestTemplateConfig;
 import com.messageservice.dto.MessageDtoRequest;
 import com.messageservice.dto.MessageDtoResponse;
 import com.messageservice.dto.MessageDtoUpdateRequest;
@@ -22,16 +23,18 @@ public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository repository;
     private final PersonClient client;
+    private final RestTemplateConfig restTemplateConfig;
     private final SequenceNumberServiceImpl sequenceNumberService;
     private final ModelMapper mapper;
 
     @Autowired
     public MessageServiceImpl(MessageRepository repository,
                               PersonClient client,
-                              SequenceNumberServiceImpl sequenceNumberService,
+                              RestTemplateConfig restTemplateConfig, SequenceNumberServiceImpl sequenceNumberService,
                               ModelMapper mapper) {
         this.repository = repository;
         this.client = client;
+        this.restTemplateConfig = restTemplateConfig;
         this.sequenceNumberService = sequenceNumberService;
         this.mapper = mapper;
     }
@@ -51,7 +54,8 @@ public class MessageServiceImpl implements MessageService {
             throws MessageNotFoundException, RecipientNotFoundException {
 
         try {
-            client.getPersonById(recipientId, jwt);
+            //client.getPersonById(recipientId, jwt);
+            restTemplateConfig.getPersonById(recipientId, jwt);
 
             List<Message> messageList = repository.findByRecipientId(recipientId);
             if (!messageList.isEmpty()) {
